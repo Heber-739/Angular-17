@@ -1,0 +1,72 @@
+<app-title title="control flow" withShadow />
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+  <div class="bg-white rounded shadow p-10">
+    <h2 class="text-2xl font-bold mb-5">if: {{showContent()}} </h2>
+
+
+    <button class="p-2 bg-blue-500 rounded text-white"
+    (click)="toggle()"> Click me</button>
+
+    @if (showContent()) {
+      <h3>show!</h3>
+
+    } @else {
+      <h1>******</h1>
+    }
+
+  </div>
+
+  <div class="bg-white rounded shadow p-10">
+
+    <h2> {{grade()}} </h2>
+    @switch (grade()) {
+      @case ('A') {
+        <p (click)="change('B')" >Arriba de 90</p>
+      }
+      @case ('B') {
+        <p (click)="change('F')" >Arriba de 75</p>
+      }
+      @case ('F') {
+         <p (click)="change('A')" >Reprobado</p>
+      }
+    }
+
+  </div>
+
+  <div class="bg-white rounded shadow p-10">
+
+    <h2> {{frames()}} </h2>
+
+    <ul>
+
+      @for (item of frames(); track $index) {
+        <li> {{item}} </li>
+      }
+    </ul>
+
+
+  </div>
+  <div class="bg-white rounded shadow p-10">
+
+    <ul>
+
+      <h2> {{frames2()}} </h2>
+
+      @for (item of frames2(); track item ; let i = $index, first = $first, last = $last, even = $even, odd = $odd, count = $count  ){
+        <li
+        [class]="{
+          'bg-red-800': first,
+          'bg-green-800': last,
+          'bg-yellow-200': odd,
+          'bg-blue-200': even,
+        }"
+        (click)="addItem('asasdd')"> {{item}}: {{i}}/{{count}} {{first}}; {{last}}, {{even}}, {{odd}}  </li>
+      }@empty {
+        <li (click)="addItem('asd')" >No hay items</li>
+      }
+    </ul>
+
+  </div>
+
+</div>
